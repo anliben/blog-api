@@ -38,18 +38,18 @@ async def create_noticia(noticia: NoticiaSchema.NoticiaCreate, db: Session = Dep
     return NoticiaCrud.create_noticia(db, noticia)
 
 @router.get("/{noticia_id}", response_model=NoticiaSchema.Noticia)
-async def read_noticia_by_id(noticia_id: int):
-    return NoticiaCrud.get_noticia(noticia_id)
+async def read_noticia_by_id(noticia_id: int, db: Session = Depends(get_db)):
+    return NoticiaCrud.get_noticia(db, noticia_id)
 
 @router.get("/categoria/{categoria}", response_model=NoticiaSchema.Noticia)
-async def read_noticia_by_categoria(categoria: str):
-    return NoticiaCrud.get_noticia_by_categoria(categoria)
+async def read_noticia_by_categoria(categoria: str,  db: Session = Depends(get_db)):
+    return NoticiaCrud.get_noticia_by_categoria(db, categoria)
 
 @router.delete("/{noticia_id}", response_model=NoticiaSchema.Noticia)
-async def delete_noticia(noticia_id: int):
-    return NoticiaCrud.delete_noticia(noticia_id)
+async def delete_noticia(noticia_id: int, db: Session = Depends(get_db)):
+    return NoticiaCrud.delete_noticia(db, noticia_id)
 
 @router.get("/likes/{noticia_id}", response_model=NoticiaSchema.Noticia)	
-async def read_likes_noticias(noticia_id: int):
-    return NoticiaCrud.get_likes_noticia(noticia_id)
+async def read_likes_noticias(noticia_id: int,  db: Session = Depends(get_db)):
+    return NoticiaCrud.get_likes_noticia(db, noticia_id)
 
